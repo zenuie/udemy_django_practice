@@ -26,8 +26,33 @@ class Product(models.Model):
         return self.product_name
 
     def get_url(self):
-        return reverse('product_detail', args=[self.category.slug,self.slug])
+        return reverse('product_detail', args=[self.category.slug, self.slug])
 
     class Meta:
         managed = False
         db_table = 'b2c_features\".\"Product'
+
+
+class VariationManager(models.Manager):
+    def colors(self):
+        return super(VariationManager, self).filter(variation_category='color', is_active=True)
+
+    def sizes(self):
+        return super(VariationManager, self).filter(variation_category='size', is_active=True)
+
+
+class Variation(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, db_column='product')
+    variation_category = models.CharField(max_length=100)
+    variation_value = models.CharField(max_length=100)
+    is_active = models.BooleanField(default=True)
+    created_date = models.DateTimeField(auto_now=True)
+
+    objects = VariationManager()
+
+    def __str__(self):
+        return str(self.product)
+
+    class Meta:
+        managed = False
+        db_table = 'b2c_features\".\"Variation'
