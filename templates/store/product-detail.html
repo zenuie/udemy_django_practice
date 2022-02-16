@@ -21,7 +21,7 @@
                     </aside>
                     <main class="col-md-6 border-left">
                         <form action="{% url 'add_cart' single_product.id %}" method="POST">
-                        {% csrf_token %}
+                            {% csrf_token %}
                             <article class="content-body">
 
                                 <h2 class="title">{{ single_product.product_name }}</h2>
@@ -60,23 +60,10 @@
                                 {% if single_product.stock <= 0 %}
                                     <h5 class="text-danger">Out of Stock</h5>
                                 {% else %}
-                                    {% if in_cart %}
-                                        <a href="#"
-                                           class="btn  btn-success"> <span
-                                                class="text">已在購物車內</span>
-                                            <i class="fas fa-check"></i>
-                                        </a>
-                                        <a href="{% url 'carts' %}"
-                                           class="btn  btn-outline-primary"> <span
-                                                class="text">前往購物車</span>
-                                            <i class="fas fa-eye"></i>
-                                        </a>
-                                    {% else %}
-                                        <button type="submit"
-                                                class="btn  btn-primary"> <span
-                                                class="text">Add to cart</span>
-                                            <i class="fas fa-shopping-cart"></i></button>
-                                    {% endif %}
+                                    <button type="submit"
+                                            class="btn  btn-primary"> <span
+                                            class="text">Add to cart</span>
+                                        <i class="fas fa-shopping-cart"></i></button>
                                 {% endif %}
                             </article> <!-- product-info-aside .// -->
                         </form>
