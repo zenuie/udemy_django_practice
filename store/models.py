@@ -12,13 +12,13 @@ from django.urls import reverse
 
 class Product(models.Model):
     product_name = models.CharField(unique=True, max_length=200)
+    category = models.ForeignKey(Category, models.CASCADE, db_column='category')
     slug = models.CharField(unique=True, max_length=200)
     description = models.CharField(max_length=500, blank=True)
     price = models.IntegerField()
     images = models.ImageField(upload_to='photos/products')
     stock = models.IntegerField()
     is_available = models.BooleanField(default=True)
-    category = models.ForeignKey(Category, models.CASCADE, db_column='category')
     created_date = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateTimeField(auto_now_add=True)
 
@@ -46,12 +46,12 @@ class Variation(models.Model):
     variation_category = models.CharField(max_length=100)
     variation_value = models.CharField(max_length=100)
     is_active = models.BooleanField(default=True)
-    created_date = models.DateTimeField(auto_now=True)
+    create_date = models.DateTimeField(auto_now=True)
 
     objects = VariationManager()
 
     def __str__(self):
-        return str(self.product)
+        return str(self.variation_value)
 
     class Meta:
         managed = False
