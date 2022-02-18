@@ -1,0 +1,7 @@
+{% autoescape off %}
+    HI {{ user.last_name }},
+    請點擊以下網址進行驗證啟用
+    http://{{ domain }}{% url 'activate' uidb64=uid token=token %}
+
+    如果你並未送出此驗證信件，請立刻刪除該信件，並立即修改密碼。
+{% endautoescape %}
