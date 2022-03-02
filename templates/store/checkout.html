@@ -15,7 +15,8 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title mb-4">Billing Address</h4>
-                            <form action="" method="POST">
+                            <form action="{% url 'place_order' %}" method="POST">
+                                {% csrf_token %}
                                 <div class="form-row">
                                     <div class="col form-group">
                                         <label>First Name
@@ -25,7 +26,7 @@
                                     </div>
                                     <div class="col form-group">
                                         <label>Last Name
-                                            <input type="text" name="first_name" placeholder="名" class="form-control"
+                                            <input type="text" name="last_name" placeholder="名" class="form-control"
                                                    required>
                                         </label>
                                     </div>
@@ -48,6 +49,22 @@
                                 </div>
                                 <div class="form-row">
                                     <div class="col form-group">
+                                        <label>地址
+                                            <input type="text" name="address_line_1" placeholder="地址"
+                                                   class="form-control"
+                                                   required>
+                                        </label>
+                                    </div>
+                                    <div class="col form-group">
+                                        <label>樓層
+                                            <input type="text" name="address_line_2" placeholder="樓層"
+                                                   class="form-control"
+                                                   required>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col form-group">
                                         <label>縣市
                                             <input type="text" name="city" placeholder="縣市"
                                                    class="form-control"
@@ -62,8 +79,8 @@
                                         </label>
                                     </div>
                                     <div class="col form-group">
-                                        <label>路名
-                                            <input type="text" name="address_line" placeholder="路名"
+                                        <label>國家
+                                            <input type="text" name="country" placeholder="國家"
                                                    class="form-control"
                                                    required>
                                         </label>
