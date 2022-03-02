@@ -1,4 +1,3 @@
-import form as form
 from django import forms
 from .models import Account
 
