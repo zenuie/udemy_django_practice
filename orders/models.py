@@ -86,3 +86,4 @@ class Orderproduct(models.Model):
     class Meta:
         managed = False
         db_table = 'b2c_features\".\"OrderProduct'
+

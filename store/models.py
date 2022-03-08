@@ -6,6 +6,8 @@
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
+
+from accounts.models import Account
 from category.models import Category
 from django.urls import reverse
 
@@ -56,3 +58,22 @@ class Variation(models.Model):
     class Meta:
         managed = False
         db_table = 'b2c_features\".\"Variation'
+
+
+class Reviewrating(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, db_column='product')
+    user = models.ForeignKey(Account, models.CASCADE, db_column='user')
+    subject = models.CharField(max_length=100, blank=True)
+    review = models.TextField(max_length=500,blank=True)
+    rating = models.FloatField()
+    ip = models.CharField(max_length=20, blank=True)
+    status = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        managed = False
+        db_table = 'b2c_features\".\"ReviewRating'
+
+    def __str__(self):
+        return self.subject
